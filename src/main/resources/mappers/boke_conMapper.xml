@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.boke_conMapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.pojo.boke_con" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="userID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="img" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="con" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="title" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.example.demo.pojo.boke_con" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="userID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="img" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="con" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="title" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="article_con" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, userID, img, con, time, title
+  </sql>
+  <sql id="Blob_Column_List" >
+    article_con
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from boke_con
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from boke_con
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.pojo.boke_con" >
+    insert into boke_con (id, userID, img, 
+      con, time, title, 
+      article_con)
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, 
+      #{con,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, #{title,jdbcType=VARCHAR}, 
+      #{articleCon,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.pojo.boke_con" >
+    insert into boke_con
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userID,
+      </if>
+      <if test="img != null" >
+        img,
+      </if>
+      <if test="con != null" >
+        con,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="articleCon != null" >
+        article_con,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="con != null" >
+        #{con,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="articleCon != null" >
+        #{articleCon,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.pojo.boke_con" >
+    update boke_con
+    <set >
+      <if test="userid != null" >
+        userID = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null" >
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="con != null" >
+        con = #{con,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="articleCon != null" >
+        article_con = #{articleCon,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.demo.pojo.boke_con" >
+    update boke_con
+    set userID = #{userid,jdbcType=VARCHAR},
+      img = #{img,jdbcType=VARCHAR},
+      con = #{con,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      title = #{title,jdbcType=VARCHAR},
+      article_con = #{articleCon,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.pojo.boke_con" >
+    update boke_con
+    set userID = #{userid,jdbcType=VARCHAR},
+      img = #{img,jdbcType=VARCHAR},
+      con = #{con,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      title = #{title,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
